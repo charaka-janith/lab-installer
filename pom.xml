@@ -3,10 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>team-x</groupId>
     <artifactId>lab-installer</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>v1.0</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source> <!-- DO NOT USE JDK greater than 11 -->
+        <maven.compiler.target>11</maven.compiler.target> <!-- DO NOT USE JDK greater than 11 -->
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -31,45 +36,24 @@
             <artifactId>jfoenix</artifactId>
             <version>9.0.9</version>
         </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20190722</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.11</version>
-        </dependency>
+        <!--<dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit-parent</artifactId>
+            <version>5.10.0.202012080955-r</version>
+        </dependency>-->
         <dependency>
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-utils</artifactId>
             <version>3.1.0</version>
         </dependency>
-            <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
-            <dependency>
-                <groupId>org.eclipse.jgit</groupId>
-                <artifactId>org.eclipse.jgit</artifactId>
-                <version>5.10.0.202012080955-r</version>
-            </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>4.8.0.201705170830-rc1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -85,24 +69,26 @@
                     <mainClass>Launcher</mainClass>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>single</goal>
                         </goals>
                         <configuration>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>Launcher</mainClass>
-                                </transformer>
-                            </transformers>
+                            <archive>
+                                <manifest>
+                                    <mainClass>
+                                        Launcher
+                                    </mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
                         </configuration>
                     </execution>
                 </executions>

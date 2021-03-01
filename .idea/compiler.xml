@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="lab-installer" target="11" />
+      <module name="RathnapuraLabs" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
