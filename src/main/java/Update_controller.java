@@ -74,7 +74,7 @@ public class Update_controller implements Initializable {
                         if (!running[0] && Update_controller.this.btn_install.isDisable()) {
                             Platform.runLater(() -> {
                                 Update_controller.this.btn_install.setText("Finish");
-                                Update_controller.this.lbl_download.setText("Completed:\t\t100%");
+                                Update_controller.this.lbl_download.setText("Completed:\t100%");
                                 Update_controller.this.btn_install.setDisable(false);
                             });
                             try {
@@ -102,12 +102,12 @@ public class Update_controller implements Initializable {
                     }
                 }
             })).start();
-            CredentialsProvider cp = new UsernamePasswordCredentialsProvider("e_aluthwala@hotmail.com", "i2killyou");
+            CredentialsProvider cp = new UsernamePasswordCredentialsProvider("Rmedlab42@gmail.com", "rlab1984");
             (new Thread(() -> {
                 try {
                     File sourceFile = new File("../app");
                     File destFile = new File("../temp");
-                    destFile.delete();
+//                    destFile.delete();
                     if (sourceFile.renameTo(destFile)) {
                         System.out.println("Directory renamed successfully");
                     } else {
@@ -143,7 +143,7 @@ public class Update_controller implements Initializable {
                                     if (!running[0] && Update_controller.this.btn_install.isDisable() && 100 == progress.get()) {
                                         Platform.runLater(() -> {
                                             Update_controller.this.btn_install.setText("Finish");
-                                            Update_controller.this.lbl_download.setText("Completed:\t\t100%");
+                                            Update_controller.this.lbl_download.setText("Completed:\t100%");
                                             Update_controller.this.btn_install.setDisable(false);
                                         });
                                         try {
